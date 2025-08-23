@@ -167,7 +167,7 @@ FILE *mosquitto__fopen(const char *path, const char *mode, bool restrict_read)
 			fprintf(stderr,
 #endif
 					"Warning: File %s has world readable permissions. Future versions will refuse to load this file."
-					"To fix this, use `chmod 0700 %s`.",
+					"To fix this, use `chmod 0640 %s`.",
 					path, path);
 #if 0
 			return NULL;
