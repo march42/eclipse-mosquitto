@@ -20,6 +20,7 @@ Default uid and gid are 1883.
 
 - uid and gid can be specified at build time with `--build-arg APP_UID={uid}` and`--build-arg APP_GID={gid}`
 - uid and gid can be specified at runtime with `--env HOST_UID={uid}` and `--env HOST_GID={gid}`
+- changing of uid/gid will fail, if uid/gid already used
 
 ## Running without a configuration file
 Mosquitto 2.0 requires you to configure listeners and authentication before it
