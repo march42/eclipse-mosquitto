@@ -17,15 +17,17 @@ ENV HOST_UID=${APP_UID}
 ENV HOST_GID=${APP_GID}
 
 RUN set -x && \
+    apk --no-cache add \
+        daemontools-encore \
+        shadow \
+        && \
     apk --no-cache add --virtual build-deps \
         build-base \
         cmake \
         cjson-dev \
-        daemontools-encore \
         gnupg \
         linux-headers \
         openssl-dev \
-        shadow \
         util-linux-dev && \
     wget https://github.com/warmcat/libwebsockets/archive/v${LWS_VERSION}.tar.gz -O /tmp/lws.tar.gz && \
     echo "$LWS_SHA256  /tmp/lws.tar.gz" | sha256sum -c - && \
