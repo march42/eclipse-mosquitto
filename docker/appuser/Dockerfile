@@ -9,12 +9,13 @@ ENV VERSION=2.0.22 \
     LWS_VERSION=4.2.1 \
     LWS_SHA256=842da21f73ccba2be59e680de10a8cce7928313048750eb6ad73b6fa50763c51
 
-# APP_UID/APP_GID will set the mosquitto UID/GID at build time (Dockerfile)
-ARG APP_UID=1883
-ARG APP_GID=1883
-# HOST_UID/HOST_GID will set the mosquitto UID/GID at run time (entrypoint.sh)
-ENV HOST_UID=${APP_UID}
-ENV HOST_GID=${APP_GID}
+# UID/GID will set the mosquitto UID/GID at build time (Dockerfile)
+ARG UID=1883
+ARG GID=1883
+# PUID/PGID will set the mosquitto UID/GID at run time (entrypoint.sh)
+# and run mosquitto under the changed user
+ENV PUID=${UID}
+ENV PGID=${GID}
 
 RUN set -x && \
     apk --no-cache add \
@@ -82,8 +83,8 @@ RUN set -x && \
         WITH_WEBSOCKETS=yes \
         prefix=/usr \
         binary && \
-    addgroup -S -g ${APP_GID} mosquitto 2>/dev/null && \
-    adduser -S -u ${APP_UID} -D -H -h /var/empty -s /sbin/nologin -G mosquitto -g mosquitto mosquitto 2>/dev/null && \
+    addgroup -S -g ${GID} mosquitto 2>/dev/null && \
+    adduser -S -u ${UID} -D -H -h /var/empty -s /sbin/nologin -G mosquitto -g mosquitto mosquitto 2>/dev/null && \
     mkdir -p /mosquitto/config /mosquitto/data /mosquitto/log && \
     install -d /usr/sbin/ && \
     install -s -m755 /build/mosq/client/mosquitto_pub /usr/bin/mosquitto_pub && \

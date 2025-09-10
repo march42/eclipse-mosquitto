@@ -18,8 +18,8 @@ Two docker volumes have been created in the image to be used for persistent stor
 The image runs mosquitto under the mosquitto user and group.
 Default uid and gid are 1883.
 
-- uid and gid can be specified at build time with `--build-arg APP_UID={uid}` and`--build-arg APP_GID={gid}`
-- uid and gid can be specified at runtime with `--env HOST_UID={uid}` and `--env HOST_GID={gid}`
+- uid and gid can be specified at build time with `--build-arg UID={uid}` and`--build-arg GID={gid}`
+- uid and gid can be specified at runtime with `--env PUID={uid}` and `--env PGID={gid}`
 - changing of uid/gid will fail, if uid/gid already used
 
 ## Running without a configuration file

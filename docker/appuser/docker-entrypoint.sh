@@ -1,9 +1,10 @@
 #!/bin/ash
+### docker-entrypoint.sh for alpine linux
 set -e
 
 # get current uid/gid for user mosquitto
-APP_UID=$(/usr/bin/id -u mosquitto)
-APP_GID=$(/usr/bin/id -g mosquitto)
+PUID=$(/usr/bin/id -u mosquitto)
+PGID=$(/usr/bin/id -g mosquitto)
 
 # prepare user/group and permissions
 if [ "$(/usr/bin/id -u)" != '0' ]; then
